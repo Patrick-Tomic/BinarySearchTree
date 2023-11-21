@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import Tree from './tree'
-import type Node from './node'
-const tree = new Tree([9, 7, 5, 2, 3])
+const tree = new Tree([9, 7, 5, 1, 3])
 tree.buildTree(tree.arr)
 console.log(tree.root)
-const prettyPrint = (node: Node | null, prefix = '', isLeft = true) => {
+function prettyPrint (node: { data: number, right: any | null, left: any | null } | null, prefix = '', isLeft = true) {
   if (node === null) {
     return
   }
@@ -16,4 +15,5 @@ const prettyPrint = (node: Node | null, prefix = '', isLeft = true) => {
     prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true)
   }
 }
+tree.insert(2)
 prettyPrint(tree.root)

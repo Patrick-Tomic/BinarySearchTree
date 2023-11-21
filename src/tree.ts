@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import Node from './node'
 export default class Tree {
   arr: number[]
-  root: null | Node
+  root: Node | null
   constructor (Array: number[]) {
     this.arr = Array
     this.root = null
@@ -44,6 +45,17 @@ export default class Tree {
     } else if (node.data === arr[0]) {
       arr.shift()
       this.buildTree(arr)
+    }
+  }
+
+  insert (value: number, node: { data: number, left: any | null, right: any | null } | null = this.root) {
+    if (node == null) {
+      node = new Node(value)
+    }
+    if (node.data > value) {
+      node.left = this.insert(value, node.left)
+    } else if (node.data < value) {
+      node.right = this.insert(value, node.right)
     }
   }
 }
