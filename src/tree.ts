@@ -21,7 +21,12 @@ export default class Tree {
       this.buildTree(arr)
     }
     if (node != null) {
-      this.searchTree(node, arr)
+      if (node.data === arr[0]) {
+        arr.shift()
+        this.buildTree(arr)
+      } else {
+        this.searchTree(node, arr)
+      }
     }
   }
 
@@ -42,20 +47,50 @@ export default class Tree {
       } else if (node.right != null) {
         this.searchTree(node.right, arr)
       }
-    } else if (node.data === arr[0]) {
-      arr.shift()
-      this.buildTree(arr)
     }
   }
 
-  insert (value: number, node: { data: number, left: any | null, right: any | null } | null = this.root) {
+  insert (value: number, node: null | { data: number, left: any | null, right: any | null } = this.root) {
     if (node == null) {
-      node = new Node(value)
+      return new Node(value)
     }
     if (node.data > value) {
       node.left = this.insert(value, node.left)
     } else if (node.data < value) {
       node.right = this.insert(value, node.right)
     }
+    return node
+  }
+
+  delete (value: number, node: null | { data: number, left: any | null, right: any | null } = this.root) {
+    if (node == null) {
+      console.log('value not found')
+      return node
+    }
+    if (node.data > value) {
+      node.left = this.delete(value, node.left)
+      return node
+    } else if (node.data < value) {
+      node.right = this.delete(value, node.right)
+      return node
+    }
+
+    if (node.right === null) return node.left
+    else if (node.left === null) return node.right
+    else {
+      let parent = node
+      let successor = node.right
+      while (successor.left != null) {
+        parent = successor
+        successor = successor.left
+      }
+      if (parent === node) {
+        parent.right = successor.right
+      } else {
+        parent.left = successor.right
+      }
+      node.data = successor.data
+    }
+    return node
   }
 }
