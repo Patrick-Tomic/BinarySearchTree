@@ -128,4 +128,34 @@ export default class Tree {
     }
     console.log(arr)
   }
+
+  preOrder (arr: number[] = [], node: null | { data: number, left: any | null, right: any | null } = this.root) {
+    if (node == null) {
+      return
+    }
+    arr.push(node.data)
+    this.preOrder(arr, node.left)
+    this.preOrder(arr, node.right)
+    return arr
+  }
+
+  inOrder (arr: number[] = [], node: null | { data: number, left: any | null, right: any | null } = this.root) {
+    if (node == null) {
+      return
+    }
+    this.inOrder(arr, node.left)
+    arr.push(node.data)
+    this.inOrder(arr, node.right)
+    return arr
+  }
+
+  postOrder (arr: number[] = [], node: null | { data: number, left: any | null, right: any | null } = this.root) {
+    if (node == null) {
+      return
+    }
+    this.postOrder(arr, node.left)
+    this.postOrder(arr, node.right)
+    arr.push(node.data)
+    return arr
+  }
 }
