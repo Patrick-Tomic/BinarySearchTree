@@ -109,4 +109,23 @@ export default class Tree {
       this.find(value, node.right)
     }
   }
+
+  levelOrder (arr: number[] = [], node: null | { data: number, left: any | null, right: any | null } = this.root) {
+    if (node == null) {
+      return
+    }
+    const queue: any[] = []
+    queue.push(node)
+    while (queue.length !== 0) {
+      const tempNode = queue.shift()
+      arr.push(tempNode.data)
+      if (tempNode.left != null) {
+        queue.push(tempNode.left)
+      }
+      if (tempNode.right != null) {
+        queue.push(tempNode.right)
+      }
+    }
+    console.log(arr)
+  }
 }
