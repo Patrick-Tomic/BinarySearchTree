@@ -93,4 +93,20 @@ export default class Tree {
     }
     return node
   }
+
+  find (value: number, node: null | { data: number, left: any | null, right: any | null } = this.root) {
+    if (node == null) {
+      console.log('value not found')
+      return
+    }
+    if (node.data === value) {
+      console.log(node)
+      return
+    }
+    if (node.data > value) {
+      this.find(value, node.left)
+    } else if (node.data < value) {
+      this.find(value, node.right)
+    }
+  }
 }

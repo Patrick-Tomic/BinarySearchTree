@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { prependListener } from 'process'
 import Tree from './tree'
 const tree = new Tree([9, 7, 5, 1, 3])
 
@@ -18,7 +17,4 @@ function prettyPrint (node: { data: number, right: any | null, left: any | null 
 tree.buildTree(tree.arr)
 console.log(tree.root)
 prettyPrint(tree.root)
-tree.insert(2)
-tree.insert(4)
-tree.delete(3)
-prettyPrint(tree.root)
+tree.find(8)
