@@ -17,4 +17,5 @@ function prettyPrint (node: { data: number, right: any | null, left: any | null 
 tree.buildTree(tree.arr)
 console.log(tree.root)
 prettyPrint(tree.root)
-tree.find(8)
+tree.insert(6)
+console.log('tree height is ' + tree.height())

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
@@ -157,5 +158,14 @@ export default class Tree {
     this.postOrder(arr, node.right)
     arr.push(node.data)
     return arr
+  }
+
+  height (node: null | { data: number, right: null | Node, left: null | Node } = this.root): any {
+    let height: number = 0
+    if (node == null) {
+      return height
+    }
+    height += 1
+    return Math.max(this.height(node.right), this.height(node.left)) + height
   }
 }
