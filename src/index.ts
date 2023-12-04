@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 import Tree from './tree'
-const tree = new Tree([66, 43, 88, 109, 44, 76, 125])
-
 function prettyPrint (node: { data: number, right: any | null, left: any | null } | null, prefix = '', isLeft = true) {
   if (node === null) {
     return
@@ -14,9 +12,23 @@ function prettyPrint (node: { data: number, right: any | null, left: any | null 
     prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true)
   }
 }
+// eslint-disable-next-line prefer-const
+let arr: number[] = []
+for (let i = 0; i < 100; i++) {
+  arr.push((Math.floor(Math.random() * 100)) + 1)
+}
+const tree = new Tree(arr)
 tree.buildTree(tree.arr)
-console.log(tree.root)
 prettyPrint(tree.root)
-tree.insert(6)
-const inOrder = tree.inOrder()
-console.log(inOrder)
+tree.isBalanced()
+console.log(tree.preOrder())
+console.log(tree.inOrder())
+console.log(tree.postOrder())
+tree.insert(7)
+tree.insert(1004)
+tree.insert(1)
+tree.isBalanced()
+tree.reBalance()
+console.log(tree.preOrder())
+console.log(tree.inOrder())
+console.log(tree.postOrder())

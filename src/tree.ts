@@ -1,17 +1,22 @@
+/* eslint-disable @typescript-eslint/space-before-function-paren */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable @typescript-eslint/no-confusing-void-expression */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import Node from './node'
 export default class Tree {
-  arr: number[]
+  arr: number[] | undefined
   root: Node | null
   constructor (Array: number[]) {
     this.arr = Array
     this.root = null
   }
 
-  buildTree (arr: number[]) {
+  buildTree (arr: number[] | undefined) {
+    if (arr === undefined) {
+      console.log('undefined arr')
+      return
+    }
     const start = 0
     const end = arr.length
     const mid = Math.floor((start + end) / 2)
@@ -140,7 +145,10 @@ export default class Tree {
     return arr
   }
 
-  inOrder (arr: number[] = [], node: null | { data: number, left: any | null, right: any | null } = this.root) {
+  inOrder(arr: number[] = [], node: null | { data: number, left: any | null, right: any | null } = this.root): number[] | undefined {
+    if (this.inOrder === undefined) {
+      return
+    }
     if (node == null) {
       return
     }
@@ -198,5 +206,12 @@ export default class Tree {
     } else {
       return console.log('Is balanced')
     }
+  }
+
+  reBalance () {
+    this.arr = this.inOrder()
+    this.root = null
+    this.buildTree(this.arr)
+    this.isBalanced()
   }
 }
