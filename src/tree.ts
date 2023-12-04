@@ -168,4 +168,35 @@ export default class Tree {
     height += 1
     return Math.max(this.height(node.right), this.height(node.left)) + height
   }
+
+  depth (value: number, node: null | { data: number, left: any | null, right: any | null } = this.root, height: number = 0) {
+    if (node == null) {
+      console.log('Node not in tree')
+      return
+    }
+    if (node.data === value) {
+      console.log('the depth is ' + height)
+      return
+    }
+    height++
+    if (value < node.data) {
+      this.depth(value, node.left, height)
+    } else if (value > node.data) {
+      this.depth(value, node.right, height)
+    }
+  }
+
+  isBalanced () {
+    const node: null | { data: number, left: any | null, right: any | null } = this.root
+    if (node == null) {
+      return
+    }
+    const rightHeight = this.height(node.right)
+    const leftHeight = this.height(node.left)
+    if (Math.abs(leftHeight - rightHeight) > 1) {
+      return console.log('not balanced')
+    } else {
+      return console.log('Is balanced')
+    }
+  }
 }
